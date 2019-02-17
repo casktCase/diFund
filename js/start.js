@@ -4,7 +4,6 @@
 //may keep it extra simple, roadmap might build in ways to enable/disable expenses
 //and configure current static vars.  Time/scheduling aspect and addition of other 
 //than monthly expeses 
-var debugV = "";
 
 //master function
 function init() {
@@ -35,29 +34,20 @@ function expensesMonthly() {
     var sum = 0;
 
     var expenses = new Array();
-    //"mortgage",
-    expenses[0] = 200;
-    //"escrow",
-    expenses[1] = 20;
-    //"car",
-    expenses[2] = 60;
-    //"carIns",
-    expenses[3] = 20;
-    //"groceries",
-    expenses[4] = 80;
-    //"entertainment",
-    expenses[5] = 40;
-    //"utilities",
-    expenses[6] = 50;
-    //"yearlyFees",
-    expenses[7] = 10;
-    //"clothing",
-    expenses[8] = 10;
-    //"loans",
-    expenses[9] = 10;
+    expenses[0] = { prop1: "mortgage", prop2: 200 };
+    expenses[1] = { prop1: "escrow", prop2: 20 };
+    expenses[2] = { prop1: "car", prop2: 60 };
+    expenses[3] = { prop1: "carIns", prop2: 20 };
+    expenses[4] = { prop1: "groceries", prop2: 80 };
+    expenses[5] = { prop1: "entertainment", prop2: 40 };
+    expenses[6] = { prop1: "utilities", prop2: 50 };
+    expenses[7] = { prop1: "yearlyFees", prop2: 10 };
+    expenses[8] = { prop1: "clothing", prop2: 10 };
+    expenses[9] = { prop1: "loans", prop2: 10 };
 
-    for (var i = 0; i < expenses.length; i++)
-        sum += expenses[i];
+    expenses.forEach(function (value, index, arry) {
+        sum += value.prop2;
+    });
 
     return sum;
 
