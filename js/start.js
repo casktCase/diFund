@@ -1,16 +1,14 @@
 //disaster fund calculator
 //input a fixed amount of money, recurring expenses, and calculate how long you can live.
-//Designed as a lightweight js web app first, eventually use js display frameworks.
-//may keep it extra simple, roadmap might build in ways to enable/disable expenses
-//and configure current static vars.  Time/scheduling aspect and addition of other 
-//than monthly expeses 
 
 //master function
 function init() {
 
+    var diFund = 9000;
+
     var sum = expensesMonthly();
-    var mos = calculateMonths(sum);
-    document.getElementById("xpns").innerHTML = " Monthly expenses: " + sum + " your fund lasts " + mos + " months.";
+    var mos = calculateMonths(sum, diFund);
+    document.getElementById("total").innerHTML = " Monthly expenses: $" + sum + ", your fund of $" + diFund + " lasts " + mos + " months.";
 
 }
 
@@ -18,10 +16,9 @@ function init() {
 //know hw many months it will last
 //todo: make expenses function send data via param
 //make the result a float
-function calculateMonths(exps) {
+//generalize function so someone can choose other time frame like weeks
+function calculateMonths(exps, diFund) {
 
-    //disaster fund total static at first, will be input
-    var diFund = 12000;
     var total = 0;
     total = diFund / exps;
     return total;
@@ -46,13 +43,28 @@ function expensesMonthly() {
     expenses[9] = { prop1: "loans", prop2: 10 };
 
     expenses.forEach(function (value, index, arry) {
+
         sum += value.prop2;
     });
 
+    listExpenses(expenses);
     return sum;
 
 }
 
+//takes the expense list and displays it in a ul
+function listExpenses(expenses) {
+
+    var list = "";
+    expenses.forEach(function (value, index, arry) {
+
+        list += "<li>" + value.prop1 + " = $" + value.prop2 + "</li>";
+    });
+    document.getElementById("expenses").innerHTML = list;
+
+}
+
+//wait until the page contents are loaded before firing init.
 window.onload = function () {
     init();
 }
